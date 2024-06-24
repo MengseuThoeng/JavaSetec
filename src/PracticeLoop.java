@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class JavaHomework3 {
+public class PracticeLoop {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
