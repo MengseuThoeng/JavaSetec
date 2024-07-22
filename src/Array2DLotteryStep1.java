@@ -50,13 +50,16 @@ public class Array2DLotteryStep1 {
                 bets[playerCount][betIndex] = scanner.nextInt();
                 betIndex++;
             }
+            char choice;
+            do {
+                System.out.print("Do you want to continue? (y/n): ");
+                choice = scanner.next().toLowerCase().charAt(0);
+                if (choice != 'y' && choice != 'n') {
+                    System.out.println("Invalid choice. Please enter 'y' or 'n'.");
+                }
+            } while (choice != 'y' && choice != 'n');
 
-            System.out.print("Do you want to continue? (y/n): ");
-            char choice = scanner.next().charAt(0);
-            if (choice == 'n' || choice == 'N') {
-                break;
-            } else if (choice != 'y' && choice != 'Y') {
-                System.out.println("Invalid choice. Exiting.");
+            if (choice == 'n') {
                 break;
             }
 
@@ -80,15 +83,22 @@ public class Array2DLotteryStep1 {
         }
 
         // Display winners
-        System.out.println("Winners List:");
         boolean hasWinner = false;
         for (int player = 0; player <= playerCount; player++) {
             if (winnings[player] > 0) {
-                System.out.println("Player " + (player + 1) + " won $" + winnings[player]);
                 hasWinner = true;
+                break;
             }
         }
-        if (!hasWinner) {
+
+        if (hasWinner) {
+            System.out.println("Winners List:");
+            for (int player = 0; player <= playerCount; player++) {
+                if (winnings[player] > 0) {
+                    System.out.println("Player " + (player + 1) + " won $" + winnings[player]);
+                }
+            }
+        } else {
             System.out.println("No winners.");
         }
 
