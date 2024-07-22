@@ -68,13 +68,13 @@ public class Array2DLotteryStep1 {
         }
 
         // Winning number
-        int winningNumber = 99; // You can change this to any number
+        int winningNumber = 99;
 
         // Calculate winnings for each player
         for (int player = 0; player <= playerCount; player++) {
             for (int i = 0; i < betCount[player] * 2; i += 2) {
                 if (bets[player][i] == winningNumber) {
-                    winnings[player] += bets[player][i + 1] * 80;  // 1 * 80 if win
+                    winnings[player] += bets[player][i + 1] * 80;
                 }
             }
         }
