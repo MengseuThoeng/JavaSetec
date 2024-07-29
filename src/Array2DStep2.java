@@ -1,11 +1,15 @@
 import java.util.Scanner;
 
 public class Array2DStep2 {
-    static void show1(){
+
+    // Display the menu for day 1
+    static void show1() {
         System.out.println("1. Play");
         System.out.print("Please Choose: ");
     }
-    static void showAll(){
+
+    // Display the menu for subsequent days
+    static void showAll() {
         System.out.println("1. Play");
         System.out.println("2. Report");
         System.out.println("3. Exit");
@@ -15,8 +19,7 @@ public class Array2DStep2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Maximum number of players
-        final int MAX_PLAYERS = 10;
+        final int MAX_PLAYERS = 10; // Maximum number of players
 
         int[][] bets = new int[MAX_PLAYERS][100];  // Maximum 100 bets per player
         int[] betCount = new int[MAX_PLAYERS];     // Store the number of bets for each player
@@ -27,26 +30,27 @@ public class Array2DStep2 {
         int day = 1;  // Start at day 1
 
         while (true) {
-
-            if (day==1){
+            // Show menu options based on the day
+            if (day == 1) {
                 show1();
-            }else{
+            } else {
                 showAll();
             }
             int choice = scanner.nextInt();
 
-            if (day==1){
-                if (choice>1){
-                    System.out.println("Invalid choice. Please enter 1.");
-                    continue;
-                }
+            // Validate input choice on day 1
+            if (day == 1 && choice > 1) {
+                System.out.println("Invalid choice. Please enter 1.");
+                continue;
             }
 
+            // Handle the user's choice
             if (choice == 1) {
                 System.out.println("Day " + day);
 
                 int playerCount = 0;  // Reset player count for the new day
 
+                // Loop for each player's betting process
                 while (true) {
                     System.out.print("Player " + (playerCount + 1) + ", how much do you want to bet?: ");
                     int count = scanner.nextInt();
@@ -58,6 +62,7 @@ public class Array2DStep2 {
                     betCount[playerCount] = count;
                     int betIndex = 0;
 
+                    // Collect bets and prices from the player
                     for (int i = 0; i < count; i++) {
                         while (true) {
                             System.out.print("Num" + (i + 1) + ": ");
@@ -84,6 +89,8 @@ public class Array2DStep2 {
                         bets[playerCount][betIndex] = scanner.nextInt();
                         betIndex++;
                     }
+
+                    // Ask if the user wants to continue entering bets
                     char continueChoice;
                     do {
                         System.out.print("Do you want to continue? (y/n): ");
@@ -93,13 +100,14 @@ public class Array2DStep2 {
                         }
                     } while (continueChoice != 'y' && continueChoice != 'n');
 
+                    // If the user chooses not to continue, calculate winnings and losses
                     if (continueChoice == 'n') {
-                        // Winning number
-                        int winningNumber = 99;
+                        int winningNumber = 99; // Set the winning number
 
-                        // Calculate winnings for each player and update owner's gains and losses
                         int totalGains = 0;
                         int totalLosses = 0;
+
+                        // Calculate winnings for each player and update owner's gains and losses
                         for (int player = 0; player <= playerCount; player++) {
                             for (int i = 0; i < betCount[player] * 2; i += 2) {
                                 if (bets[player][i] == winningNumber) {
@@ -111,6 +119,7 @@ public class Array2DStep2 {
                                 }
                             }
                         }
+
                         ownerGains[day - 1] = totalGains;
                         ownerLosses[day - 1] = totalLosses;
 
@@ -133,11 +142,12 @@ public class Array2DStep2 {
                         } else {
                             System.out.println("No winners.");
                         }
+
                         System.out.println("+++++++++++++++++++++++++++++");
                         System.out.println("Owner Gains: $" + totalGains);
                         System.out.println("Owner Losses: $" + totalLosses);
 
-                        day++;
+                        day++; // Increment the day
                         break;
                     }
 
@@ -148,6 +158,7 @@ public class Array2DStep2 {
                     }
                 }
             } else if (choice == 2) {
+                // Display the report for each day
                 System.out.println("-----------------------------");
                 for (int d = 1; d < day; d++) {
                     System.out.println("Day " + d);
@@ -156,12 +167,12 @@ public class Array2DStep2 {
                     System.out.println("-----------------------------");
                 }
             } else if (choice == 3) {
-                break;
+                break; // Exit the program
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3.");
             }
         }
 
-        scanner.close();
+        scanner.close(); // Close the scanner
     }
 }
