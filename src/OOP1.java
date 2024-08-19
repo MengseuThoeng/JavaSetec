@@ -1,4 +1,4 @@
-public class OP1 {
+public class OOP1 {
         public static void main(String[] args) {
             // Creating objects
             Car car1 = new Car();
